@@ -1,0 +1,107 @@
+<!DOCTYPE htmlhtml>
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    {% block stylesheets %}
+    {% endblock %}
+</head>
+<body>
+
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="{{ path('home') }}">Home</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+
+
+
+            {% if (is_granted('ROLE_RESPCOMPTA') or is_granted('ROLE_RESPCLI')) %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('customer_orderView') }}">Customer Order</a>
+                </li>
+            {% endif %}
+
+
+            {% if is_granted('ROLE_RESPCLI') %}
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('customer_orderAdd') }}">Add Customer Order</a>
+            </li>
+            {% endif %}
+            {% if is_granted('ROLE_RESPFOUR') %}
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('resp_fournAdd') }}">Add Provider Order</a>
+            </li>
+            {% endif %}
+            {% if is_granted('ROLE_ADMIN') %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Edit User
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{ path('create_user') }}">New User</a>
+                        <a class="dropdown-item" href="#">Modify User</a>
+                        <a class="dropdown-item" href="#">Delete User</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Edit Customer
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{ path('create_customer') }}">New Customer</a>
+                        <a class="dropdown-item" href="#">Modify Customer</a>
+                        <a class="dropdown-item" href="#">Delete Customer</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Edit Provider
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{ path('create_provider') }}">New provider</a>
+                        <a class="dropdown-item" href="#">Modify provider</a>
+                        <a class="dropdown-item" href="#">Delete provider</a>
+                    </div>
+                </li>
+
+            {% endif %}
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            {% if is_granted('ROLE_ADMIN') %}
+            <button type="button" class="btn btn-danger mr-3">Admin</button>
+            {% endif %}
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+                    <a href="{{path('app_logout')}}">logout
+                    </a>
+                </button>
+
+
+
+        </form>
+    </div>
+</nav>
+{% endif %}
+
+{% block body %}
+{% endblock %}
+{% block javascripts %}
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+            integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"
+            integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s"
+            crossorigin="anonymous"></script>
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,51 @@
+security:
+    encoders:
+        App\Entity\User:
+            algorithm: auto
+
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    providers:
+        # used to reload user from session & other features (e.g. switch_user)
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: email
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            anonymous: true
+            lazy: true
+            provider: app_user_provider
+            guard:
+                authenticators:
+                    - App\Security\UserAuthenticator
+            logout:
+                path: app_logout
+                # where to redirect after logout
+                # target: app_any_route
+
+            # activate different ways to authenticate
+            # https://symfony.com/doc/current/security.html#firewalls-authentication
+
+            # https://symfony.com/doc/current/security/impersonating_user.html
+            # switch_user: true
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/respClient, roles: ROLE_RESPCLI }
+        - { path: ^/respFournisseur, roles: ROLE_RESPFOUR }
+        - { path: ^/respCommande, roles: ROLE_RESPCOM }
+        - { path: ^/respQualite, roles: ROLE_RESPQUAl }
+        - { path: ^/respCompta, roles: ROLE_RESPCOMPTA }
+
+    role_hierarchy:
+            ROLE_ADMIN:     [ROLE_RESPCLI, ROLE_RESPFOUR, ROLE_RESPCOM, ROLE_RESPQUAl, ROLE_RESPCOMPTA]
+
+
+
+
+

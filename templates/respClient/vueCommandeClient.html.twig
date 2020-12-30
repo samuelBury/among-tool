@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CustomerOrderController!{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Order id</th>
+            <th scope="col">Order date</th>
+            <th scope="col">date of the order</th>
+            <th scope="col">expected delivery date</th>
+
+
+        </tr>
+        </thead>
+        <tbody>
+        {%for suivie in com  %}
+        <tr>
+            <th scope="row">{{suivie.id}}</th>
+            <td>{{suivie.bonCommandeClient}}</td>
+            <td>{{suivie.dateCommandeClient|date('Y-m-d')}}</td>
+            <td>{{suivie.dateLivraisonClient|date('Y-m-d')}}</td>
+            <td>
+                <a href="{{ path('customer_orderEdit',{id: suivie.id}) }}" class="btn btn-primary">Edit</a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+
+{% endblock %}
