@@ -35,6 +35,11 @@ class User implements UserInterface
      */
     private $password;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $codeDroitCommandeClient;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -111,5 +116,17 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getCodeDroitCommandeClient(): ?int
+    {
+        return $this->codeDroitCommandeClient;
+    }
+
+    public function setCodeDroitCommandeClient(int $codeDroitCommandeClient): self
+    {
+        $this->codeDroitCommandeClient = $codeDroitCommandeClient;
+
+        return $this;
     }
 }

@@ -30,17 +30,11 @@ class AdminController extends AbstractController
     {
         $user = new User();
 
-        $form = $this->createFormBuilder($user)
-            ->add('email', EmailType::class)
-            ->add('password', TextType::class)
-            ->add('save', SubmitType::class, ['label' => 'Ajouter une personne'])
-            ->getForm();
 
 
-        return $this->render('admin/createUser.html.twig', [
 
-            'form' => $form->createView(),
-        ]);
+
+        return $this->render('admin/createUser.html.twig');
     }
 
     /**
