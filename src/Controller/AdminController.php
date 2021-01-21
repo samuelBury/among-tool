@@ -28,6 +28,66 @@ class AdminController extends AbstractController
      */
     public function createUser(): Response
     {
+        $arrayDroit= array(
+            ["droit lecture CLIENT :", "clientRead",1],
+            ["droit ecriture CLIENT :","clientWrite",3],
+            ["droit lecture DATE COMMANDE :","dateDeLaCommandeRead",1],
+            ["droit ecriture DATE COMMANDE :","dateDeLaCommandeWrite",3],
+            ["droit suppretion DATE CLIENT :","dateDeLaCommandeDelete",5],
+            ["droit lecture NUM COMMANDE CLIENT :","numCommandeClientRead",1],
+            ["droit ecriture NUM COMMANDE CLIENT :","numCommandeClientWrite",3],
+            ["droit suppretion NUM COMMANDE CLIENT :","numCommandeClientDelete",5],
+            ["droit lecture DOCUMENT CLIENT :","DocumentClientRead",1],
+            ["droit ecriture DOCUMENT CLIENT :","DocumentClientWrite",3],
+            ["droit suppretion DOCUMENT CLIENT :","DocumentClientDelete",5],
+            ["droit impretion DOCUMENT CLIENT :","DocumentClientPrint",7],
+            ["droit lecture DATE LIVRAISON PREVU","dateLivraisonClientPrevuRead",1],
+            ["droit ecriture DATE LIVRAISON PREVU","dateLivraisonClientPrevuWrite",3],
+            ["droit suppretion DATE LIVRAISON PREVU","dateLivraisonClientPrevuDelete",5],
+            ["droit lecture DATE REGLEMENT","dateReglementFactureRead",1],
+            ["droit ecriture DATE REGLEMENT","dateReglementFactureWrite",3],
+            ["droit suppretion DATE REGLEMENT","dateReglementFactureDelete",5]);
+
+
+        $cumule = array(0,0,0,0,0,0);
+
+        for($i =0, $iMax = count($arrayDroit); $i< $iMax; ++$i){
+
+
+
+
+
+            if (isset($_POST[$arrayDroit[$i][1]])) {
+                if ($i <2){
+                    $cumule[0]+=$arrayDroit[$i][2];
+                }
+                if ($i>1 and $i<5){
+                    $cumule[1]+=$arrayDroit[$i][2];
+                }
+                if ($i>4 and $i<8){
+                    $cumule[2]+=$arrayDroit[$i][2];
+                }
+                if ($i>7 and $i<12){
+                    $cumule[3]+=$arrayDroit[$i][2];
+                }
+                if ($i>11 and $i<15){
+                    $cumule[4]+=$arrayDroit[$i][2];
+                }
+                if ($i>14 and $i<18){
+                    $cumule[5]+=$arrayDroit[$i][2];
+                }
+
+
+
+
+
+            }
+
+        }
+
+
+        $codeDroit = implode(",",$cumule)       ;
+        echo $codeDroit                          ;
         $user = new User();
 
 

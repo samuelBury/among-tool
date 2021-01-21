@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20201230122706 extends AbstractMigration
+final class Version20210121145211 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -20,15 +20,14 @@ final class Version20201230122706 extends AbstractMigration
     public function up(Schema $schema) : void
     {
         // this up() migration is auto-generated, please modify it to your needs
-
-        $this->addSql('ALTER TABLE user ADD code_droit_commande_client INT NOT NULL');
+        $this->addSql('ALTER TABLE client CHANGE num_tel num_tel VARCHAR(40) NOT NULL');
+        $this->addSql('ALTER TABLE fournisseur CHANGE tel tel VARCHAR(50) NOT NULL');
     }
 
     public function down(Schema $schema) : void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE commande_client DROP FOREIGN KEY FK_C510FF8019EB6921');
-        $this->addSql('DROP INDEX IDX_C510FF8019EB6921 ON commande_client');
-        $this->addSql('ALTER TABLE user DROP code_droit_commande_client');
+        $this->addSql('ALTER TABLE client CHANGE num_tel num_tel VARCHAR(20) CHARACTER SET utf8mb4 NOT NULL COLLATE `utf8mb4_unicode_ci`');
+        $this->addSql('ALTER TABLE fournisseur CHANGE tel tel VARCHAR(15) CHARACTER SET utf8mb4 NOT NULL COLLATE `utf8mb4_unicode_ci`');
     }
 }

@@ -44,6 +44,11 @@ class CommandeFournisseur
      */
     private $fournisseur;
 
+    /**
+     * @ORM\OneToOne(targetEntity=ControleQualite::class, mappedBy="CommandeFournisseur", cascade={"persist", "remove"})
+     */
+    private $controleQualite;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -105,6 +110,24 @@ class CommandeFournisseur
     public function setFournisseur(Fournisseur $fournisseur): self
     {
         $this->fournisseur = $fournisseur;
+
+        return $this;
+    }
+
+    public function getControleQualite(): ?ControleQualite
+    {
+        return $this->controleQualite;
+    }
+
+    public function setControleQualite(?ControleQualite $controleQualite): self
+    {
+        $this->controleQualite = $controleQualite;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newCommandeFournisseur = null === $controleQualite ? null : $this;
+        if ($controleQualite->getCommandeFournisseur() !== $newCommandeFournisseur) {
+            $controleQualite->setCommandeFournisseur($newCommandeFournisseur);
+        }
 
         return $this;
     }

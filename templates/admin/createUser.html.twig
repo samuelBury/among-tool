@@ -13,80 +13,70 @@
 
         <div class="mt-4">
             <h4>Droit commande client</h4>
-            <div>
-                <table class="table">
 
-                    <thead> <!-- En-tête du tableau -->
-                    <tr>
-                        <th>attribut</th>
-                        <th>lire</th>
-                        <th>ecrire</th>
-                        <th>supprimer</th>
-                        <th>imprimer</th>
-                    </tr>
-                    </thead>
+                <form action="AdminController.php" method="POST">
+                    <table class="table">
+
+                        <thead>
+                        <!-- En-tête du tableau -->
+                        <tr>
+                            <th>attribut</th>
+                            <th>lire</th>
+                            <th>ecrire</th>
+                            <th>supprimer</th>
+                            <th>imprimer</th>
+                        </tr>
+                        </thead>
 
 
 
-                    <tbody> <!-- Corps du tableau -->
-                    <tr>
-                        <td>Client</td>
-                        <td> <input type="checkbox" id="scales" name="clientRead"></td>
-                        <td> <input type="checkbox" id="scales" name="clientWrite"></td>
-                    </tr>
-                    <tr>
-                        <td>Date de la commande</td>
-                        <td> <input type="checkbox" id="scales" name="dateDeLaCommandeRead"
-                                    ></td>
-                        <td> <input type="checkbox" id="scales" name="dateDeLaCommandeWrite"
-                                    ></td>
-                        <td>  <input type="checkbox" id="scales" name="dateDeLaCommandeDelete"
-                                     ></td>
-                    </tr>
-                    <tr>
-                        <td>numero commande</td>
-                        <td><input type="checkbox" id="scales" name="numCommandeClientRead"
-                                   ></td>
-                        <td><input type="checkbox" id="scales" name="numCommandeClientWrite"
-                                   ></td>
-                        <td><input type="checkbox" id="scales" name="numCommandeClientDelete"
-                                   ></td>
-                    </tr>
-                    <tr>
-                        <td>document format PDF</td>
-                        <td><input type="checkbox" id="scales" name="DocumentClientRead"
-                                   ></td>
-                        <td><input type="checkbox" id="scales" name="DocumentClientWrite"
-                                   ></td>
-                        <td><input type="checkbox" id="scales" name="DocumentClientDelete"
-                                   ></td>
-                        <td><input type="checkbox" id="scales" name="DocumentClientPrint"
-                                   ></td>
-                    </tr>
-                    <tr>
-                        <td>Date de livraison demandée par le client</td>
-                        <td><input type="checkbox" id="scales" name="dateLivraisonClientPrevuRead"
-                                   ></td>
-                        <td><input type="checkbox" id="scales" name="dateLivraisonClientPrevuWrite"
-                                   ></td>
-                        <td><input type="checkbox" id="scales" name="dateLivraisonClientPrevuDelete"
-                                   ></td>
-                    </tr>
-                    <tr>
-                        <td>Date de règlement facture</td>
-                        <td><input type="checkbox" id="scales" name="dateReglementFactureRead"
-                                   ></td>
-                        <td><input type="checkbox" id="scales" name="dateReglementFactureWrite"
-                                   ></td>
-                        <td><input type="checkbox" id="scales" name="dateReglementFactureDelete"
-                                   ></td>
-                    </tr>
-                    </tbody>
-                </table>
-                <div>
-                    <button type="submit">Envoyer le formulaire</button>
-                </div>
-            </div>
+                        <tbody>
+                        <!-- Corps du tableau -->
+                        <tr>
+                            <td>Client</td>
+                            <td> <input type="checkbox" id="scales" name="clientRead"></td>
+                            <td> <input type="checkbox" id="scales" name="clientWrite"></td>
+                        </tr>
+                        <tr>
+                            <td>Date de la commande</td>
+                            <td> <input type="checkbox" id="scales" name="dateDeLaCommandeRead"></td>
+                            <td> <input type="checkbox" id="scales" name="dateDeLaCommandeWrite"></td>
+                            <td> <input type="checkbox" id="scales" name="dateDeLaCommandeDelete"></td>
+                        </tr>
+                        <tr>
+                            <td>numero commande</td>
+                            <td><input type="checkbox" id="scales" name="numCommandeClientRead"></td>
+                            <td><input type="checkbox" id="scales" name="numCommandeClientWrite"></td>
+                            <td><input type="checkbox" id="scales" name="numCommandeClientDelete"></td>
+                        </tr>
+                        <tr>
+                            <td>document format PDF</td>
+                            <td><input type="checkbox" id="scales" name="DocumentClientRead"></td>
+                            <td><input type="checkbox" id="scales" name="DocumentClientWrite"></td>
+                            <td><input type="checkbox" id="scales" name="DocumentClientDelete"></td>
+                            <td><input type="checkbox" id="scales" name="DocumentClientPrint"></td>
+                        </tr>
+                        <tr>
+                            <td>Date de livraison demandée par le client</td>
+                            <td><input type="checkbox" id="scales" name="dateLivraisonClientPrevuRead"></td>
+                            <td><input type="checkbox" id="scales" name="dateLivraisonClientPrevuWrite"></td>
+                            <td><input type="checkbox" id="scales" name="dateLivraisonClientPrevuDelete"></td>
+                        </tr>
+                        <tr>
+                            <td>Date de règlement facture</td>
+                            <td><input type="checkbox" id="scales" name="dateReglementFactureRead"></td>
+                            <td><input type="checkbox" id="scales" name="dateReglementFactureWrite"></td>
+                            <td><input type="checkbox" id="scales" name="dateReglementFactureDelete"></td>
+                        </tr>
+                        </tbody>
+
+                    </table>
+                    <div class="col-12">
+                        <button class="btn btn-primary" type="submit">Submit form</button>
+                    </div>
+                </form>
+
+
 
 
         </div>

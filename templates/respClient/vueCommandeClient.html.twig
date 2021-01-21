@@ -8,7 +8,6 @@
         <thead>
         <tr>
             <th scope="col">Order id</th>
-            <th scope="col">Order date</th>
             <th scope="col">date of the order</th>
             <th scope="col">expected delivery date</th>
 
@@ -18,7 +17,7 @@
         <tbody>
         {%for suivie in com  %}
         <tr>
-            <th scope="row">{{suivie.id}}</th>
+            
             <td>{{suivie.bonCommandeClient}}</td>
             <td>{{suivie.dateCommandeClient|date('Y-m-d')}}</td>
             <td>{{suivie.dateLivraisonClient|date('Y-m-d')}}</td>

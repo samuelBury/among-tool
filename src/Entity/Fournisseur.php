@@ -23,7 +23,7 @@ class Fournisseur
     private $nom;
 
     /**
-     * @ORM\Column(type="string", length=15)
+     * @ORM\Column(type="string", length=50)
      */
     private $tel;
 

@@ -35,7 +35,7 @@ class CommandeClient
     private $dateLivraisonClient;
 
     /**
-     * @ORM\Column(type="boolean", options={"default":true})
+     * @ORM\Column(type="boolean", options={"default":true}, nullable=true)
      */
     private $active;
 

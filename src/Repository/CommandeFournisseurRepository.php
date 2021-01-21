@@ -14,27 +14,31 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class CommandeFournisseurRepository extends ServiceEntityRepository
 {
+
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, CommandeFournisseur::class);
     }
 
-    // /**
-    //  * @return CommandeFournisseur[] Returns an array of CommandeFournisseur objects
-    //  */
-    /*
-    public function findByExampleField($value)
+
+    /**
+     * @param array $idComCLis
+     * @return CommandeFournisseur[] Returns an array of CommandeFournisseur objects
+     */
+
+    public function findByComCli(array $idComCLis): array
     {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+
+        $em = $this->getEntityManager();
+
+        $query = $em->createQuery(
+            'SELECT * FROM commande_fournisseur WHERE commande_client_id in :range ')
+            ->setParameter('range', $idComCLis);
+
+        return $query->getResult();
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?CommandeFournisseur
