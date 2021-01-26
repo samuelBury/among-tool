@@ -76,11 +76,12 @@ class AppFixtures extends Fixture
             /*
              * generation COMMANDE CLIENT
              */
-            $commandeCli->setClient($clientArr[array_rand($clientArr)])
+            $commandeCli->setClient($clientArr[$i])
                 ->setDateCommandeClient($generator->dateTime)
                 ->setDateLivraisonClient($generator->dateTime)
                 ->setBonCommandeClient($generator->randomNumber())
                 ->setNumFacture($generator->randomNumber())
+                ->setDateLivraisonDemandeeParClient($generator->dateTime())
                 ->setDateDeReglement($generator->dateTime)
                 ->setActive(true);
             $commandeCliArr[] = $commandeCli;
@@ -102,7 +103,7 @@ class AppFixtures extends Fixture
              * generation COMMANDE FOURNISSEUR
              */
            $commandeFournisseur->setBonCommandeFournisseur($generator->randomNumber())
-                                ->setCommandeClient($commandeCliArr[array_rand($commandeCliArr)])
+                                ->setCommandeClient($commandeCliArr[$i])
                                 ->setDateBonCommande($generator->dateTime)
                                 ->setDateLivraisonDonnee(($generator->dateTime))
                                 ->setFournisseur($fournisseur);

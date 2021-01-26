@@ -23,20 +23,19 @@ class CommandeFournisseurRepository extends ServiceEntityRepository
 
 
     /**
-     * @param array $idComCLis
-     * @return CommandeFournisseur[] Returns an array of CommandeFournisseur objects
+     * @param int $idComCli
+     * @return array Returns an array of CommandeFournisseur objects
      */
 
-    public function findByComCli(array $idComCLis): array
+    public function findByComCli(int $idComCli): array
     {
 
-        $em = $this->getEntityManager();
 
-        $query = $em->createQuery(
-            'SELECT * FROM commande_fournisseur WHERE commande_client_id in :range ')
-            ->setParameter('range', $idComCLis);
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.commandeClient = '.trim($idComCli))
+            ->getQuery()
+            ->getResult();
 
-        return $query->getResult();
     }
 
 

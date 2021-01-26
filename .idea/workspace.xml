@@ -20,20 +20,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4fe1b623-6d11-42f1-af9f-dce0c4c0a06e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20201230122706.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/DashBoardController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DashBoardController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DataFixtures/AppFixtures.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataFixtures/AppFixtures.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Client.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Client.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/CommandeClient.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/CommandeClient.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/CommandeFournisseur.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/CommandeFournisseur.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Fournisseur.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Fournisseur.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Repository/CommandeClientRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/CommandeClientRepository.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Repository/CommandeFournisseurRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/CommandeFournisseurRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/createUser.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/createUser.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/respClient/vueCommandeClient.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/respClient/vueCommandeClient.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/ControleQualiteRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/ControleQualiteRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/dash_board/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/dash_board/index.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -236,7 +231,13 @@
       <workItem from="1610354006745" duration="711000" />
       <workItem from="1610635825334" duration="237000" />
       <workItem from="1611150019783" duration="11774000" />
-      <workItem from="1611232552556" duration="7899000" />
+      <workItem from="1611232552556" duration="9715000" />
+      <workItem from="1611244032266" duration="460000" />
+      <workItem from="1611255533610" duration="9876000" />
+      <workItem from="1611315241671" duration="10545000" />
+      <workItem from="1611339099273" duration="1647000" />
+      <workItem from="1611420252219" duration="2390000" />
+      <workItem from="1611577248650" duration="3741000" />
     </task>
     <servers />
   </component>
@@ -272,10 +273,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="449" y="148" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1536.824@0.0.1536.824" timestamp="1607688417618" />
-    <state x="499" y="167" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1607086766401">
+    <state x="499" y="167" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1611258622095">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="499" y="167" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1536.824@0.0.1536.824" timestamp="1607086766401" />
+    <state x="499" y="167" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1536.824@0.0.1536.824" timestamp="1611258622095" />
     <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1610636059992">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -297,10 +298,18 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1606831434077" />
-    <state x="41" y="190" key="run.anything.popup" timestamp="1611237676322">
+    <state x="108" y="0" width="1242" height="573" key="dock-window-1" timestamp="1611259025644">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="41" y="190" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1611237676322" />
+    <state x="108" y="0" width="1242" height="573" key="dock-window-1/0.0.1536.824@0.0.1536.824" timestamp="1611259025644" />
+    <state x="647" y="173" key="refactoring.ChangeSignatureDialog" timestamp="1611256178903">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="647" y="173" key="refactoring.ChangeSignatureDialog/0.0.1536.824@0.0.1536.824" timestamp="1611256178903" />
+    <state x="42" y="190" key="run.anything.popup" timestamp="1611324374759">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="42" y="190" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1611324374759" />
     <state x="430" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1611235578431">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

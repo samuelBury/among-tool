@@ -4,7 +4,7 @@ namespace App\Repository;
 
 use App\Entity\CommandeClient;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\QueryBuilder;
+
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -20,17 +20,17 @@ class CommandeClientRepository extends ServiceEntityRepository
         parent::__construct($registry, CommandeClient::class);
     }
 
-    /**
-     * @return array Returns an array of CommandeClient objects
-     */
 
+    /**
+     * @return CommandeClient[] Returns an array of CommandeClient objects
+     */
     public function findAllActive(): array
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.active = true')
             ->getQuery()
-            ->getResult()
-            ->getOneOrNullResult();
+            ->getResult();
+
 
     }
 

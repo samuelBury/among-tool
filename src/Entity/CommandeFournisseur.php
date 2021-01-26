@@ -49,6 +49,11 @@ class CommandeFournisseur
      */
     private $controleQualite;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=CommandeClient::class, inversedBy="CommandeFournisseur")
+     */
+    private $no;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -128,6 +133,18 @@ class CommandeFournisseur
         if ($controleQualite->getCommandeFournisseur() !== $newCommandeFournisseur) {
             $controleQualite->setCommandeFournisseur($newCommandeFournisseur);
         }
+
+        return $this;
+    }
+
+    public function getNo(): ?CommandeClient
+    {
+        return $this->no;
+    }
+
+    public function setNo(?CommandeClient $no): self
+    {
+        $this->no = $no;
 
         return $this;
     }

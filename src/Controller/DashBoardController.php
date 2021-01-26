@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\CommandeFournisseur;
 use App\Repository\CommandeClientRepository;
 use App\Repository\CommandeFournisseurRepository;
+use App\Repository\ControleQualiteRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -11,34 +13,36 @@ use Symfony\Component\Routing\Annotation\Route;
 class DashBoardController extends AbstractController
 {
 
-    /**
-     * @var CommandeClientRepository
-     */
-    private $comCliRepo;
-
-    /**
-     * @var CommandeFournisseurRepository
-     */
-
-    private $comFourRepo;
 
     /**
      * @Route("/dash/board", name="dash_board")
+     * @param CommandeClientRepository $comCliRepo
+     * @param CommandeFournisseurRepository $comFourRepo
+     * @param ControleQualiteRepository $controleQualiteRepository
+     * @return Response
      */
-    public function index(): Response
+    public function index(CommandeClientRepository $comCliRepo, CommandeFournisseurRepository $comFourRepo, ControleQualiteRepository $controleQualiteRepository): Response
     {
 
-        $comCli = $this->comCliRepo->findAllActive();
+        $comCli = $comCliRepo->findAllActive();
+
+        dump($comCli);
 
         foreach ($comCli as $uneComCli){
-            $range[]= $uneComCli->getId();
-        }
-        $comFour = $this->comFourRepo->findByComCli($range[]);
+            $arrComFour =$comFourRepo->findByComCli($uneComCli->getId());
+            foreach ($arrComFour as $uneComFour){
+                $uneComCli->addCommandeFournisseur($uneComFour);
+            }
 
-        dump($comFour);
+
+
+
+        }
+
+
 
         return $this->render('dash_board/index.html.twig', [
-            'controller_name' => 'DashBoardController',
+            'comCli' => $comCli
         ]);
     }
 }

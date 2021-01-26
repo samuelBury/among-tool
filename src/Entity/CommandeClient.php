@@ -55,6 +55,21 @@ class CommandeClient
      */
     private $numFacture;
 
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $dateLivraisonDemandeeParClient;
+
+    /**
+     * @ORM\OneToMany(targetEntity=CommandeFournisseur::class, mappedBy="no")
+     */
+    private $CommandeFournisseur;
+
+    public function __construct()
+    {
+        $this->CommandeFournisseur = new ArrayCollection();
+    }
+
 
 
     public function getId(): ?int
@@ -144,6 +159,48 @@ class CommandeClient
     public function setNumFacture(?string $numFacture): self
     {
         $this->numFacture = $numFacture;
+
+        return $this;
+    }
+
+    public function getDateLivraisonDemandeeParClient(): ?\DateTimeInterface
+    {
+        return $this->dateLivraisonDemandeeParClient;
+    }
+
+    public function setDateLivraisonDemandeeParClient(\DateTimeInterface $dateLivraisonDemandeeParClient): self
+    {
+        $this->dateLivraisonDemandeeParClient = $dateLivraisonDemandeeParClient;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|CommandeFournisseur[]
+     */
+    public function getCommandeFournisseur(): Collection
+    {
+        return $this->CommandeFournisseur;
+    }
+
+    public function addCommandeFournisseur(CommandeFournisseur $commandeFournisseur): self
+    {
+        if (!$this->CommandeFournisseur->contains($commandeFournisseur)) {
+            $this->CommandeFournisseur[] = $commandeFournisseur;
+            $commandeFournisseur->setNo($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommandeFournisseur(CommandeFournisseur $commandeFournisseur): self
+    {
+        if ($this->CommandeFournisseur->removeElement($commandeFournisseur)) {
+            // set the owning side to null (unless already changed)
+            if ($commandeFournisseur->getNo() === $this) {
+                $commandeFournisseur->setNo(null);
+            }
+        }
 
         return $this;
     }
