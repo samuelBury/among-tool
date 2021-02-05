@@ -40,6 +40,7 @@ class RespClientController extends AbstractController
      */
     public function AddCommandeClient(EntityManagerInterface $entityManager, Request $request)
     {
+
         $com = new CommandeClient();
         $com->setActive(1);
         $form = $this->createForm(CommandeClientType::class, $com);
@@ -51,7 +52,7 @@ class RespClientController extends AbstractController
             $entityManager->flush();
             return $this->redirectToRoute('home');
         }
-
+        dump($request);
         return $this->render('respClient/customerOrderAdd.html.twig', [
             'form' => $form->createView()
         ]);
@@ -61,6 +62,8 @@ class RespClientController extends AbstractController
     /**
      * @Route ("/respClient/{id}", name="customer_orderEdit")
      * @param CommandeClient $commandeClient
+     * @param Request $request
+     * @param EntityManagerInterface $em
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function edit(CommandeClient $commandeClient, Request $request, EntityManagerInterface $em)

@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DashBoardController!{% endblock %}
+
+{% block body %}
+
+    <table class="table-bordered">
+        <thead>
+        <tr>
+            <th scope="col">N° Commande Fournisseur</th>
+            <th scope="col">nom fournisseur</th>
+            <th scope="col">Date passage de la commande fournisseur</th>
+            <th scope="col">Date de production</th>
+            <th scope="col">Date de fin prevue</th>
+            <th scope="col">Date d’expédition des marchandises</th>
+        </tr>
+
+        </thead>
+        <tbody>
+
+        {% for a in comFour %}
+        <tr>
+            <th>{{ a.bonCommandeFournisseur }}</th>
+            <th>{{ a.fournisseur.nom}}</th>
+            <th>{{ a.dateBonCommande|date('Y-m-d')}}</th>
+            <th>{{ a.dateDebutProduction|date('Y-m-d')}}</th>
+            <th>{{ a.dateFinProduction|date('Y-m-d')}}</th>
+            <th>{{ a.dateRemise|date('Y-m-d')}}</th>
+            <th><a href="#"><button type="button" class="btn btn-primary">Controle Qualité</button></a></th>
+        </tr>
+        {% endfor %}
+
+        </tbody>
+
+
+
+    </table>
+
+{% endblock %}
+
+
+

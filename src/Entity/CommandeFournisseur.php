@@ -54,6 +54,21 @@ class CommandeFournisseur
      */
     private $no;
 
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $dateDebutProduction;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $dateFinProduction;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $dateRemise;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -145,6 +160,42 @@ class CommandeFournisseur
     public function setNo(?CommandeClient $no): self
     {
         $this->no = $no;
+
+        return $this;
+    }
+
+    public function getDateDebutProduction(): ?\DateTimeInterface
+    {
+        return $this->dateDebutProduction;
+    }
+
+    public function setDateDebutProduction(?\DateTimeInterface $dateDebutProduction): self
+    {
+        $this->dateDebutProduction = $dateDebutProduction;
+
+        return $this;
+    }
+
+    public function getDateFinProduction(): ?\DateTimeInterface
+    {
+        return $this->dateFinProduction;
+    }
+
+    public function setDateFinProduction(?\DateTimeInterface $dateFinProduction): self
+    {
+        $this->dateFinProduction = $dateFinProduction;
+
+        return $this;
+    }
+
+    public function getDateRemise(): ?\DateTimeInterface
+    {
+        return $this->dateRemise;
+    }
+
+    public function setDateRemise(?\DateTimeInterface $dateRemise): self
+    {
+        $this->dateRemise = $dateRemise;
 
         return $this;
     }

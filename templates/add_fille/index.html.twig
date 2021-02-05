@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AddFilleController!{% endblock %}
+
+{% block body %}
+
+
+<div class="container">
+    < <form name="fo" method="post" action="{{ path('add_fille') }}" enctype="multipart/form-data">
+        <input type="file" multiple="multiple" name="fichier"  />
+        <input type="submit" name="valider" value="Envoyer le fichier" />
+    </form>
+</div>
+{% endblock %}

@@ -36,7 +36,7 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="float")
      */
     private $codeDroitCommandeClient;
 
@@ -118,12 +118,12 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
-    public function getCodeDroitCommandeClient(): ?int
+    public function getCodeDroitCommandeClient(): ?string
     {
         return $this->codeDroitCommandeClient;
     }
 
-    public function setCodeDroitCommandeClient(int $codeDroitCommandeClient): self
+    public function setCodeDroitCommandeClient(string $codeDroitCommandeClient): self
     {
         $this->codeDroitCommandeClient = $codeDroitCommandeClient;
 

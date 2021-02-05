@@ -23,6 +23,7 @@ class CommandeClientType extends AbstractType
             ->add('bonCommandeClient', TextType::class)
             ->add('dateCommandeClient',DateType::class)
             ->add('dateLivraisonClient',DateType::class)
+            ->add('dateLivraisonDemandeeParClient', DateType::class)
             ->add('Client',EntityType::class,[
                 'class'=>Client::class,
                 'choice_label'=>'nom',

@@ -7,27 +7,45 @@ use App\Entity\Fournisseur;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
+use Symfony\Component\Mailer\MailerInterface;
+
+
+use Faker;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+
+
 use Symfony\Component\HttpFoundation\Response;
+
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Form\ClientType;
 use App\Form\FournisseurType;
+
 
 
 class AdminController extends AbstractController
 {
     /**
      * @Route("/admin/createUser", name="create_user")
-     *
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @param MailerInterface $mailer
+     * @return Response
+     * @throws TransportExceptionInterface
      */
-    public function createUser(): Response
+    public function createUser(Request $request, EntityManagerInterface $entityManager, MailerInterface $mailer): Response
     {
+
+        $generator = Faker\Factory::create("fr_FR");
+        $user = new User();
+        $emails =$request->request->get('email');
+        $mailObject = "Among-tool password";
+        $mailMessage = "Votre mot de passe pour acceder à votre espace Among-tool est : ";
+        $mailMessage2 = " Vous pourrez ensuite changer votre mot de passe depuis votre espace";
+
+
         $arrayDroit= array(
             ["droit lecture CLIENT :", "clientRead",1],
             ["droit ecriture CLIENT :","clientWrite",3],
@@ -46,66 +64,94 @@ class AdminController extends AbstractController
             ["droit suppretion DATE LIVRAISON PREVU","dateLivraisonClientPrevuDelete",5],
             ["droit lecture DATE REGLEMENT","dateReglementFactureRead",1],
             ["droit ecriture DATE REGLEMENT","dateReglementFactureWrite",3],
-            ["droit suppretion DATE REGLEMENT","dateReglementFactureDelete",5]);
+            ["droit suppretion DATE REGLEMENT","dateReglementFactureDelete",5],
+            ["droit lecture NUM FACTURE","numFactureRead",1],
+            ["droit ecriture NUM FACTURE","numFactureFactureWrite",3],
+            ["droit suppretion NUM FACTURE","numFactureFactureDelete",5]);
 
 
-        $cumule = array(0,0,0,0,0,0);
-
-        for($i =0, $iMax = count($arrayDroit); $i< $iMax; ++$i){
+        $cumule = array(0,0,0,0,0,0,0);
 
 
+        $i=0;
+        foreach ($arrayDroit as $unDroit){
 
 
-
-            if (isset($_POST[$arrayDroit[$i][1]])) {
+            if (isset($_POST[$unDroit[1]])) {
                 if ($i <2){
-                    $cumule[0]+=$arrayDroit[$i][2];
+                    $cumule[0]+=$unDroit[2];
                 }
-                if ($i>1 and $i<5){
-                    $cumule[1]+=$arrayDroit[$i][2];
+                if ($i>1 && $i<5){
+                    $cumule[1]+=$unDroit[2];
                 }
-                if ($i>4 and $i<8){
-                    $cumule[2]+=$arrayDroit[$i][2];
+                if ($i>4 && $i<8){
+                    $cumule[2]+=$unDroit[2];
                 }
-                if ($i>7 and $i<12){
-                    $cumule[3]+=$arrayDroit[$i][2];
+                if ($i>7 && $i<12){
+                    $cumule[3]+=$unDroit[2];
                 }
-                if ($i>11 and $i<15){
-                    $cumule[4]+=$arrayDroit[$i][2];
+                if ($i>11 && $i<15){
+                    $cumule[4]+=$unDroit[2];
                 }
-                if ($i>14 and $i<18){
-                    $cumule[5]+=$arrayDroit[$i][2];
+                if ($i>14 && $i<18){
+                    $cumule[5]+=$unDroit[2];
                 }
-
-
-
-
+                if ($i>17 ){
+                    $cumule[6]+=$unDroit[2];
+                }
 
             }
-
+        $i++;
         }
 
 
-        $codeDroit = implode(",",$cumule)       ;
-        echo $codeDroit                          ;
-        $user = new User();
+
+        $codeDroit = implode(",",$cumule);
+        $password = $generator->password(10, 10);
+        if (isset($emails)){
+
+            /*
+             * creation d'un utilisateur dans la bdd
+             */
+            $user->setEmail($emails);
+            $user->setCodeDroitCommandeClient($codeDroit);
+            $user->setPassword($password);
+
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            /*
+             * creation
+             */
+
+            $email = new Email();
+            $email->from("samy.bury@gmail.com")
+                ->to($emails)
+                ->priority(Email::PRIORITY_HIGH)
+                ->subject($mailObject)
+                ->text($mailMessage.$password.$mailMessage2)
+                ->html('<h1>Lorem ipsum</h1>');
 
 
+
+            dump($email);
+            $mailer->send($email);
+            dump($codeDroit);
+        }
+
+
+
+        dump($request);
 
 
 
         return $this->render('admin/createUser.html.twig');
     }
 
-    /**
-     * @return Response
-     * @Route ("aaaa" , name="aa")
-     */
-    public function add(){
-        return $this->render('admin/createCustomer.html.twig');
-    }
 
     /**
+     * @param EntityManagerInterface $entityManager
+     * @param Request $request
      * @return Response
      * @Route ("admin/createCustomer", name="create_customer")
      */
@@ -131,6 +177,7 @@ class AdminController extends AbstractController
      * @param EntityManagerInterface $entityManager
      * @param Request $request
      * @Route ("admin/createProvider", name="create_provider")
+     * @return RedirectResponse|Response
      */
     public function createProvider(EntityManagerInterface $entityManager, Request $request)
     {

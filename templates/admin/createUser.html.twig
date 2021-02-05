@@ -4,17 +4,17 @@
 
 {% block body %}
     <div class ="container mt-4">
-        <h1>Create an user</h1>
-        <div class="container">
-            <label for="mail">adresse mail</label>
 
-            <input type="text" id="name" name="email"  >
-        </div>
 
-        <div class="mt-4">
-            <h4>Droit commande client</h4>
 
-                <form action="AdminController.php" method="POST">
+
+                <form action="{{ path('create_user') }}" method="post">
+                    <h1>Create an user</h1>
+                    <div class="container">
+                        <label for="mail">adresse mail</label>
+
+                        <input type="text" id="name" name="email"  >
+                    </div>
                     <table class="table">
 
                         <thead>

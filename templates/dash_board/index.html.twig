@@ -13,20 +13,14 @@
             <th scope="col">Date de livraison demandée par le client</th>
             <th scope="col">Date de livraison</th>
             <th scope="col">Date de règlement facture</th>
-            <th scope="col">N° Commande Fournisseur</th>
-            <th scope="col">nom fournisseur</th>
-            <th scope="col">Date de la commande fournisseur</th>
-            <th scope="col">Date de production</th>
-            <th scope="col">Date de production</th>
-            <th scope="col">Date d’expédition des marchandises</th>
-            <th scope="col">N°contrôle</th>
-            <th scope="col">Date du contrôle qualité</th>
+
 
         </tr>
 
         </thead>
         <tbody>
         {% for a in comCli %}
+
         <tr>
             <th>{{ a.bonCommandeClient }}</th>
             <th>{{ a.client.nom }}</th>
@@ -34,9 +28,11 @@
             <th>{{ a.dateLivraisonClient|date('Y-m-d')}}</th>
             <th>{{ a.dateLivraisonDemandeeParClient|date('Y-m-d')}}</th>
             <th>{{ a.dateDeReglement|date('Y-m-d')}}</th>
+            <th><a href="{{ path('dashFour',{id: a.id})}}"><button type="button" class="btn btn-primary">Commande Fournisseur</button></a></th>
 
 
         </tr>
+
         {% endfor %}
         </tbody>
 

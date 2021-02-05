@@ -26,15 +26,15 @@ class AppFixtures extends Fixture
     {
         // $product = new Product();
         // $manager->persist($product);
-        $generator = Faker\Factory::create("fr_FR");
 
-        $clientArr = array();
+            $generator = Faker\Factory::create("fr_FR");
 
-        $commandeCliArr = array();
+            $clientArr = array();
+
+            $commandeCliArr = array();
 
 
-        for($i=0; $i<40; $i++){
-
+            for($i=0; $i<3; $i++){
 
             /*
              * declaration des nouvelles instances a creer aléatoirement
@@ -53,7 +53,7 @@ class AppFixtures extends Fixture
             $password = $this->encoder->encodePassword($user,'password');
             $user->setEmail($generator->email)
                 ->setPassword($password)
-                ->setCodeDroitCommandeClient($generator->randomNumber());
+                ->setCodeDroitCommandeClient($generator->title());
             $manager->persist($user);
             $manager->flush();
 
