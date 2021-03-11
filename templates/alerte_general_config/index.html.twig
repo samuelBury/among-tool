@@ -1,0 +1,104 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AlerteGeneralConfigController!{% endblock %}
+
+{% block body %}
+    <script>var i = 1;</script>
+    <div class="container ">
+        <form class="d-flex flex-column" method="post" action="{{ path('alerte_general_config') }}">
+
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">champ d'application</span>
+                <select class="form-select" aria-label="Default select example" name="colonneApplication">
+                    <option selected></option>
+                    <option value="x">X</option>
+                    <option value="y">Y</option>
+                    <option value="z">Z</option>
+                    <option value="a">A</option>
+                </select>
+
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Délai No 1</span>
+                <input type="number" id="tentacles" name="delai1"
+                   min="0" max="100">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Délai No 2</span>
+                <input type="number" id="tentacles" name="delai2"
+                       min="0" max="100">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Délai No 3</span>
+                <input type="number" id="tentacles" name="delai3"
+                       min="0" max="100">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">champ de controle</span>
+                <select class="form-select" aria-label="Default select example" name="colonneControle">
+                    <option selected></option>
+                    <option value="a">A</option>
+                </select>
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">role</span>
+                <select class="form-select" aria-label="Default select example" name="profil">
+                    <option selected></option>
+                    <option value="responsableX">responsableX</option>
+                    <option value="responsableX">responsableY</option>
+                </select>
+            </div>
+            <div class="input-group mb-3" id="boo">
+                <span class="input-group-text" id="basic-addon1">User</span>
+                <select class="form-select" aria-label="Default select example" name="user0">
+                    <option selected></option>
+                    {% for user in users %}
+                    <option value="{{ user.id }}">{{ user.email }}</option>
+                    {% endfor %}
+
+                </select>
+
+            </div>
+            <div class="input-group mb-3" id="foo">
+                <i class="fas fa-plus" onclick="(function (){
+
+                    var boo = document.getElementById('boo');
+                    var div = document.createElement('div');
+                    div.setAttribute('class','input-group mb-3');
+                    var span = document.createElement('span');
+                    span.setAttribute('class','input-group-text');
+                    span.setAttribute('id','basic-addon1');
+                    span.textContent = 'User'
+                    div.appendChild(span);
+                    var select = document.createElement('select');
+                    select.setAttribute('class','form-select');
+                    select.setAttribute('aria-label','Default select example');
+                    select.setAttribute('name','user'+i.toString());
+                    var option1 = document.createElement('option');
+                    select.appendChild(option1);
+
+                {% for user in users %}
+                        var option2 = document.createElement('option');
+                        option2.setAttribute('value', '{{ user.id }}');
+                        option2.textContent = '{{ user.email }}';
+                        select.appendChild(option2);
+                {% endfor %}
+                        div.appendChild(select);
+
+                    i++;
+
+                    boo.insertAdjacentElement('afterend',div);
+
+                        })();
+                        ">
+
+                </i>
+            </div>
+
+
+
+
+            <button type="submit">creer alerte</button>
+        </form></div>
+
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AlerteConfigController!{% endblock %}
+
+{% block body %}
+
+<div class="container mt-4" onload="initElement();">
+    <form method="post" action="{{ path('alerte_config', {nomCol: nomColonne}) }}">
+        <div>
+        <label for="duree">Délaie (en jour): </label>
+            <input type="number" name="delai">
+        </div>
+        <div>
+            <label for="user" id="ajoutUser">ajouter User :
+            </label>
+            <div class="d-flex flex-column bd-highlight" id="foo" >
+
+                <script>let i =0;</script>
+            <i class="fas fa-plus" onclick="(function (){
+
+              let label = document.getElementById('foo');
+
+              var select = document.createElement('select');
+              select.setAttribute('id', 'select');
+
+              select.setAttribute('name','selectUser'+i.toString());
+                    i++;
+
+              {% for nom in usersName %}
+               var option =document.createElement('option');
+               option.setAttribute('value', '{{ nom }}');
+               option.textContent='{{ nom }}';
+               select.appendChild(option);
+              {% endfor %}
+              label.insertAdjacentElement('beforeend',select);
+              })();
+">
+
+            </i>
+            </div>
+
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-sm">creer alarme</button>
+    </form>
+
+</div>
+
+{% endblock %}

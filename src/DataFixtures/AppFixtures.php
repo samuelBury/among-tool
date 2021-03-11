@@ -6,6 +6,7 @@ use App\Entity\Client;
 use App\Entity\CommandeFournisseur;
 use App\Entity\ControleQualite;
 use App\Entity\Fournisseur;
+use App\Entity\TestClass;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker;
@@ -17,17 +18,19 @@ use App\Entity\CommandeClient;
 class AppFixtures extends Fixture
 {
     private $encoder;
+
     public function __construct(UserPasswordEncoderInterface $encoder)
     {
-        $this ->encoder =$encoder;
+        $this->encoder = $encoder;
     }
 
     public function load(ObjectManager $manager): void
     {
+
         // $product = new Product();
         // $manager->persist($product);
 
-            $generator = Faker\Factory::create("fr_FR");
+           $generator = Faker\Factory::create("fr_FR");
 
             $clientArr = array();
 
@@ -38,29 +41,32 @@ class AppFixtures extends Fixture
 
             /*
              * declaration des nouvelles instances a creer aléatoirement
-             */
+            */
             $user = new User();
             $client =new Client();
             $commandeCli =new CommandeClient();
             $fournisseur=new Fournisseur();
             $commandeFournisseur=new CommandeFournisseur();
             $cq =new ControleQualite();
+            $test = new TestClass();
 
 
             /*
              * generation USERS
-             */
+*/
             $password = $this->encoder->encodePassword($user,'password');
             $user->setEmail($generator->email)
                 ->setPassword($password)
-                ->setCodeDroitCommandeClient($generator->title());
+                ->setCodeDroitCommandeClient($generator->title())
+                ->setCodeDroitTest($generator->randomLetter);
+
             $manager->persist($user);
             $manager->flush();
 
 
             /*
              * generation CLIENT
-             */
+*/
             $client->setAdresse($generator->address)
                 ->setCodePostal($generator->postcode)
                 ->setNom($generator->company)
@@ -75,7 +81,7 @@ class AppFixtures extends Fixture
 
             /*
              * generation COMMANDE CLIENT
-             */
+*/
             $commandeCli->setClient($clientArr[$i])
                 ->setDateCommandeClient($generator->dateTime)
                 ->setDateLivraisonClient($generator->dateTime)
@@ -92,7 +98,7 @@ class AppFixtures extends Fixture
 
             /*
              * generation FOURNISSEUR
-             */
+*/
             $fournisseur->setNom($generator->name)
                 ->setTel($generator->phoneNumber);
 
@@ -101,7 +107,7 @@ class AppFixtures extends Fixture
 
             /*
              * generation COMMANDE FOURNISSEUR
-             */
+*/
            $commandeFournisseur->setBonCommandeFournisseur($generator->randomNumber())
                                 ->setCommandeClient($commandeCliArr[$i])
                                 ->setDateBonCommande($generator->dateTime)
@@ -113,14 +119,27 @@ class AppFixtures extends Fixture
 
             /*
              * generation CQ
-             */
+*/
             $cq->setCommandeFournisseur($commandeFournisseur)
                 ->setDate($generator->dateTime)
                 ->setNumControle($generator->randomNumber());
             $manager->persist($cq);
             $manager->flush();
+
+
+            /*
+             * generation test
+*/
+                $test->setA($generator->dateTime);
+                $test->setX($generator->randomLetter);
+                $test->setY($generator->randomNumber());
+                $test->setZ($generator->randomLetter);
+                $manager->persist($test);
+                $manager->flush();
+
+
         }
 
 
-    }
-}
+
+}}

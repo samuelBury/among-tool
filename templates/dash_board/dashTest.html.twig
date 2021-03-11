@@ -1,0 +1,135 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DashBoardController!{% endblock %}
+
+
+{% block body %}
+<form action="{{ path("dashFourTest") }}" method="post">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">X</th>
+            <th scope="col">Y</th>
+            <th scope="col">Z</th>
+            <th scope="col">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        a
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="{{ path("alerte_config", {nomCol: "a"}) }}">Creer une alerte</a></li>
+                    </ul>
+                </div></th>
+
+
+        </tr>
+
+        </thead>
+
+        <tbody>
+        {% for a in Tests %}
+
+            <tr>
+                <th scope="row">
+                    {% if a.x is empty %}
+                    {% if "xWrite" in droits %}
+                        <label>
+                            <input type="text" name="x{{ a.id }}">
+                        </label>
+                    {% endif%}
+                    {%elseif "xRead" in droits%}
+                    {% if "xEdit" in droits %}
+
+                        <label>
+                            <input type="text" placeholder="{{ a.x }}" name="x{{ a.id }}">
+                        </label>
+
+                    {% else %}
+
+                    {{ a.x }}
+
+                    {% endif %}
+
+                {% endif%}
+                </th>
+
+
+                <th scope="row">
+                    {% if a.y is empty %}
+                    {% if "yWrite" in droits %}
+                        <label>
+                            <input type="text" name="y{{ a.id }}">
+                        </label>
+                    {% endif%}
+                    {% elseif "yRead" in droits %}
+                        {% if "yEdit" in droits %}
+                            <label>
+                                <input type="number" placeholder="{{ a.y }}" name="y{{ a.id }}">
+                            </label>
+                        {% else%}
+
+                        {{ a.y}}
+
+                        {% endif %}
+                    {% endif %}
+                </th>
+
+
+                <th scope="row">
+                    {% if a.z is empty %}
+                        {% if "zWrite" in droits %}
+                        <label>
+                            <input type="text" name="z{{ a.id }}">
+                        </label>
+                        {% endif%}
+                    {% elseif "zRead" in droits %}
+                    {% if "zEdit" in droits %}
+                        <label>
+                            <input type="text" placeholder="{{ a.z }}" name="z{{ a.id }}">
+                        </label>
+
+                    {% else%}
+                         {{ a.z}}
+                     {% endif%}
+
+                {% endif %}
+                </th>
+
+
+                <th scope="row">
+                    {% if a.a is empty %}
+                    {% if "aWrite" in droits %}
+                        <label>
+                            <input type="date" name="a{{ a.id }}">
+                        </label>
+                    {% endif%}
+                    {% elseif "aRead" in droits %}
+                    {% if "aEdit" in droits %}
+                        <label>
+                            <input type="date" name="a{{ a.id }}" placeholder="{{ a.a|date('Y-m-d') }}" value="{{ a.a|date('Y-m-d') }}">
+                        </label>
+                    {% else %}
+                         {{ a.a|date('Y-m-d')}}
+                     {% endif %}
+
+                {% endif %}
+                </th>
+                
+            </tr>
+
+        {% endfor %}
+        </tbody>
+
+
+
+    </table>
+    <div class="col-12">
+        <button class="btn btn-primary" type="submit">Submit form</button>
+    </div>
+</form>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+{% endblock %}
+
+
+
+

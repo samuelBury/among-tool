@@ -1,11 +1,14 @@
-<!DOCTYPE htmlhtml>
+<!DOCTYPE html>
 
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Welcome!{% endblock %}</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    {% block stylesheets %}
-    {% endblock %}
+
+    <script src="https://kit.fontawesome.com/b25b27ba37.js" crossorigin="anonymous"></script>
+
+        <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
 
@@ -19,62 +22,19 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
 
-
-
-            {% if (is_granted('ROLE_RESPCOMPTA') or is_granted('ROLE_RESPCLI')) %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('customer_orderView') }}">Customer Order</a>
-                </li>
-            {% endif %}
-
-
-            {% if is_granted('ROLE_RESPCLI') %}
-
             <li class="nav-item">
-                <a class="nav-link" href="{{ path('customer_orderAdd') }}">Add Customer Order</a>
+                <a class="nav-link active" aria-current="page" href="{{ path('create_user') }}">CREATE USER</a>
             </li>
-            {% endif %}
-            {% if is_granted('ROLE_RESPFOUR') %}
-
             <li class="nav-item">
-                <a class="nav-link" href="{{ path('resp_fournAdd') }}">Add Provider Order</a>
+                <a class="nav-link active" aria-current="page" href="{{ path('dashFourTest') }}">Dashboard</a>
             </li>
-            {% endif %}
-            {% if is_granted('ROLE_ADMIN') %}
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Edit User
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{ path('create_user') }}">New User</a>
-                        <a class="dropdown-item" href="#">Modify User</a>
-                        <a class="dropdown-item" href="#">Delete User</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Edit Customer
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{ path('create_customer') }}">New Customer</a>
-                        <a class="dropdown-item" href="#">Modify Customer</a>
-                        <a class="dropdown-item" href="#">Delete Customer</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Edit Provider
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{ path('create_provider') }}">New provider</a>
-                        <a class="dropdown-item" href="#">Modify provider</a>
-                        <a class="dropdown-item" href="#">Delete provider</a>
-                    </div>
-                </li>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{{ path('alerte_general_config') }}">Alertes</a>
+            </li>
 
-            {% endif %}
         </ul>
         <form class="form-inline my-2 my-lg-0">
+
             {% if is_granted('ROLE_ADMIN') %}
             <button type="button" class="btn btn-danger mr-3">Admin</button>
             {% endif %}

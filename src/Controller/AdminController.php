@@ -6,18 +6,18 @@ use App\Entity\Client;
 use App\Entity\Fournisseur;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
-use Symfony\Component\Mailer\MailerInterface;
 
-
-use Faker;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 
 use Symfony\Component\HttpFoundation\Response;
 
+
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Form\ClientType;
@@ -31,14 +31,16 @@ class AdminController extends AbstractController
      * @Route("/admin/createUser", name="create_user")
      * @param Request $request
      * @param EntityManagerInterface $entityManager
-     * @param MailerInterface $mailer
+     * @param $mailer
      * @return Response
-     * @throws TransportExceptionInterface
      */
     public function createUser(Request $request, EntityManagerInterface $entityManager, MailerInterface $mailer): Response
     {
 
-        $generator = Faker\Factory::create("fr_FR");
+        /*
+         * init de plein de truc
+         */
+
         $user = new User();
         $emails =$request->request->get('email');
         $mailObject = "Among-tool password";
@@ -46,6 +48,9 @@ class AdminController extends AbstractController
         $mailMessage2 = " Vous pourrez ensuite changer votre mot de passe depuis votre espace";
 
 
+        /*
+         * recuperation du formulaire de droit
+         */
         $arrayDroit= array(
             ["droit lecture CLIENT :", "clientRead",1],
             ["droit ecriture CLIENT :","clientWrite",3],
@@ -103,22 +108,75 @@ class AdminController extends AbstractController
             }
         $i++;
         }
-
-
-
         $codeDroit = implode(",",$cumule);
-        $password = $generator->password(10, 10);
+
+
+
+        /*
+         * recuperation formulaire droit test
+         */
+        $arrayDroitTest= array(
+            ["droit lecture CLIENT :", "xRead",1],
+            ["droit ecriture CLIENT :","xWrite",3],
+            ["droit ecriture CLIENT :","xDel",5],
+            ["droit lecture DATE COMMANDE :","yRead",1],
+            ["droit ecriture DATE COMMANDE :","yWrite",3],
+            ["droit suppretion DATE CLIENT :","yDel",5],
+            ["droit lecture NUM COMMANDE CLIENT :","zRead",1],
+            ["droit ecriture NUM COMMANDE CLIENT :","zWrite",3],
+            ["droit suppretion NUM COMMANDE CLIENT :","zDel",5],
+            ["droit lecture DOCUMENT CLIENT :","aRead",1],
+            ["droit ecriture DOCUMENT CLIENT :","aWrite",3],
+            ["droit suppretion DOCUMENT CLIENT :","aDel",5]);
+
+
+
+
+
+        $cumule = array(0,0,0,0);
+        $i=0;
+        foreach ($arrayDroitTest as $unDroit){
+
+
+            if (isset($_POST[$unDroit[1]])) {
+                if ($i <3){
+                    $cumule[0]+=$unDroit[2];
+                }
+                if ($i>2 && $i<6){
+                    $cumule[1]+=$unDroit[2];
+                }
+                if ($i>5 && $i<9){
+                    $cumule[2]+=$unDroit[2];
+                }
+                if ($i>8 && $i<12){
+                    $cumule[3]+=$unDroit[2];
+                }
+
+
+            }
+            $i++;
+        }
+        $codeDroitTest = implode(",",$cumule);
+
+
+
+
+
+        $password = "password";
         if (isset($emails)){
 
             /*
              * creation d'un utilisateur dans la bdd
              */
+            $user->setCodeDroitTest($codeDroitTest);
             $user->setEmail($emails);
             $user->setCodeDroitCommandeClient($codeDroit);
             $user->setPassword($password);
+            if ($emails!="samy.bury@gmail.com"){
+                $entityManager->persist($user);
+                $entityManager->flush();
+            }
 
-            $entityManager->persist($user);
-            $entityManager->flush();
 
             /*
              * creation
@@ -131,11 +189,8 @@ class AdminController extends AbstractController
                 ->subject($mailObject)
                 ->text($mailMessage.$password.$mailMessage2)
                 ->html('<h1>Lorem ipsum</h1>');
-
-
-
-            dump($email);
             $mailer->send($email);
+
             dump($codeDroit);
         }
 

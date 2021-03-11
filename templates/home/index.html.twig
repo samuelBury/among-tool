@@ -13,5 +13,16 @@
             <h1 class="display-4">Tracking Control</h1>
             <p class="lead">Connect yourself</p>
         </div>
+
     </div>
+    {% if alertes is defined %}
+    <div class="container">
+        {% for alerte in alertes %}
+        <div class="alert alert-{{ alerte.color }}" role="alert">
+            {{ alerte.message }}
+        </div>
+        {% endfor %}
+
+    </div>
+    {% endif %}
 {% endblock %}

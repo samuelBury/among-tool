@@ -19,14 +19,15 @@ class ControleQualiteRepository extends ServiceEntityRepository
         parent::__construct($registry, ControleQualite::class);
     }
 
-     /**
-      * @return ControleQualite[] Returns an array of ControleQualite objects
-      */
+    /**
+     * @param string $value
+     * @return array Returns an array of ControleQualite objects
+     */
 
     public function findByComFour(string $value): array
     {
         return $this->createQueryBuilder('c')
-            ->andWhere('c.CommandeFournisseur in ('.$value.')')
+            ->andWhere('c.CommandeFournisseur = '.$value)
             ->getQuery()
             ->getResult()
         ;

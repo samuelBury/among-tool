@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Entity;
-
+use App\Entity\Client;
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Form\FormTypeInterface;
+
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -20,6 +22,7 @@ class User implements UserInterface
     private $id;
 
     /**
+     *
      * @ORM\Column(type="string", length=180, unique=true)
      */
     private $email;
@@ -36,9 +39,33 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="string")
      */
     private $codeDroitCommandeClient;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $codeDroitTest;
+
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $Profil;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Alarme::class, mappedBy="users")
+     */
+    private $alarmes;
+
+    public function __construct()
+    {
+        $this->alarmes = new ArrayCollection();
+    }
+
+
+
 
     public function getId(): ?int
     {
@@ -64,7 +91,7 @@ class User implements UserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->email;
+        return (string)$this->email;
     }
 
     /**
@@ -91,7 +118,7 @@ class User implements UserInterface
      */
     public function getPassword(): string
     {
-        return (string) $this->password;
+        return $this->password;
     }
 
     public function setPassword(string $password): self
@@ -129,4 +156,94 @@ class User implements UserInterface
 
         return $this;
     }
+
+    public function getCodeDroitTest(): ?string
+    {
+        return $this->codeDroitTest;
+    }
+
+    public function setCodeDroitTest(?string $codeDroitTest): self
+    {
+        $this->codeDroitTest = $codeDroitTest;
+
+        return $this;
+    }
+
+    public function decriptionCodeTest(string $codeDroitTest): array
+    {
+        $arrayString = explode(",", $codeDroitTest);
+
+        foreach ($arrayString as $unCode) {
+            $arrayInt[] = (int)$unCode;
+        }
+        return $arrayInt;
+    }
+
+    public function controleCode(array $arrayInt): array
+    {
+        $colonne = ["x", "y", "z", "a"];
+        $arrayDroit = array();
+        $i = 0;
+        foreach ($arrayInt as $int) {
+            if (($int == 1) || ($int == 4) || ($int == 6) || ($int == 9)) {
+                $arrayDroit[] = $colonne[$i] . "Read";
+            }
+            if (($int == 3) || ($int == 4) || ($int == 8) || ($int == 9)) {
+                $arrayDroit[] = $colonne[$i] . "Write";
+            }
+            if (($int == 5) || ($int == 8) || ($int == 6) || ($int == 9)) {
+                $arrayDroit[] = $colonne[$i] . "Edit";
+            }
+            $i++;
+        }
+        return $arrayDroit;
+    }
+
+
+
+
+    public function getProfil(): ?string
+    {
+        return $this->Profil;
+    }
+
+    public function setProfil(?string $Profil): self
+    {
+        $this->Profil = $Profil;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Alarme[]
+     */
+    public function getAlarmes(): Collection
+    {
+        return $this->alarmes;
+    }
+
+    public function addAlarme(Alarme $alarme): self
+    {
+        if (!$this->alarmes->contains($alarme)) {
+            $this->alarmes[] = $alarme;
+            $alarme->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAlarme(Alarme $alarme): self
+    {
+        if ($this->alarmes->removeElement($alarme)) {
+            $alarme->removeUser($this);
+        }
+
+        return $this;
+    }
+
+
+
+
+
+
 }
