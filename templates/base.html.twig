@@ -31,12 +31,15 @@
             <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="{{ path('alerte_general_config') }}">Alertes</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{{ path('creerEntite') }}">Creer une entité</a>
+            </li>
 
         </ul>
         <form class="form-inline my-2 my-lg-0">
 
-            {% if is_granted('ROLE_ADMIN') %}
-            <button type="button" class="btn btn-danger mr-3">Admin</button>
+            {% if is_granted('ROLE_ADMINSYSTEM') %}
+            <button type="button" class="btn btn-danger mr-3">Administrateur Système</button>
             {% endif %}
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
                     <a href="{{path('app_logout')}}">logout

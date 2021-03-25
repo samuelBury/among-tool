@@ -8,9 +8,16 @@
     <table class="table">
         <thead>
         <tr>
+            {% if "xRead" in droits %}
             <th scope="col">X</th>
+            {% endif %}
+            {% if "yRead" in droits %}
             <th scope="col">Y</th>
+            {% endif %}
+            {% if "zRead" in droits %}
             <th scope="col">Z</th>
+            {% endif %}
+          {% if "aRead" in droits %}
             <th scope="col">
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -20,6 +27,7 @@
                         <li><a class="dropdown-item" href="{{ path("alerte_config", {nomCol: "a"}) }}">Creer une alerte</a></li>
                     </ul>
                 </div></th>
+            {% endif %}
 
 
         </tr>
@@ -29,7 +37,7 @@
         <tbody>
         {% for a in Tests %}
 
-            <tr>
+            <tr>{% if "xRead" in droits %}
                 <th scope="row">
                     {% if a.x is empty %}
                     {% if "xWrite" in droits %}
@@ -52,15 +60,15 @@
 
                 {% endif%}
                 </th>
-
-
+                {% endif%}
+                {% if "yRead" in droits %}
                 <th scope="row">
                     {% if a.y is empty %}
                     {% if "yWrite" in droits %}
                         <label>
                             <input type="text" name="y{{ a.id }}">
                         </label>
-                    {% endif%}
+                    {% endif %}
                     {% elseif "yRead" in droits %}
                         {% if "yEdit" in droits %}
                             <label>
@@ -73,8 +81,9 @@
                         {% endif %}
                     {% endif %}
                 </th>
+                {% endif %}
 
-
+                {% if "zRead" in droits %}
                 <th scope="row">
                     {% if a.z is empty %}
                         {% if "zWrite" in droits %}
@@ -94,7 +103,7 @@
 
                 {% endif %}
                 </th>
-
+                {% endif%}
 
                 <th scope="row">
                     {% if a.a is empty %}

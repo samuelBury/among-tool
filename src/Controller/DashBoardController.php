@@ -76,7 +76,7 @@ class DashBoardController extends AbstractController
 
         $test =$repoTest->findAll();
         foreach ($test as $unTest){
-            $postFormX[]="x".$unTest->getId();
+            $postFormX[]=["x",$unTest->getId()];
         }
         foreach ($test as $unTest){
             $postFormY[]="y".$unTest->getId();
@@ -90,9 +90,11 @@ class DashBoardController extends AbstractController
         $arrayChampAPersiste= array();
         foreach ($postFormX as $unForm){
             $id = $unForm[1];
+
             foreach ($test as $unTest){
                 if($id == $unTest->getId()){
-                    $resultFormulaire =$request->request->get($unForm);
+                    $resultFormulaire =$request->request->get('x'.(string)$unForm[1]);
+                    dump($resultFormulaire);
                     if (($resultFormulaire!=$unTest->getX() && $resultFormulaire!="")||($resultFormulaire=="" && $unTest->getX() =="")){
                         $unTest->setX($resultFormulaire);
                         $arrayChampAPersiste[]=$unTest;

@@ -20,33 +20,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4fe1b623-6d11-42f1-af9f-dce0c4c0a06e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Controller/Alerte.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20210120134311.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20210120191013.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20210121133817.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20210121145211.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20210122141046.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20210122145313.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20210127131046.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20210127131351.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20210201145407.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/AddFilleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AddFilleController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AdminController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/DashBoardController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DashBoardController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/SecurityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/SecurityController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataFixtures/AppFixtures.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataFixtures/AppFixtures.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/ControleQualiteRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/ControleQualiteRepository.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Repository/UserRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/UserRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/createUser.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/createUser.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/home/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/dash_board/dashTest.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/dash_board/dashTest.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -301,7 +285,25 @@
       <workItem from="1615280223629" duration="13833000" />
       <workItem from="1615366272474" duration="13315000" />
       <workItem from="1615455754437" duration="10172000" />
-      <workItem from="1615497812133" duration="2107000" />
+      <workItem from="1615497812133" duration="3342000" />
+      <workItem from="1615501196953" duration="14146000" />
+      <workItem from="1615736130470" duration="29000" />
+      <workItem from="1615798520591" duration="1842000" />
+      <workItem from="1615886026954" duration="5677000" />
+      <workItem from="1616106136584" duration="858000" />
+      <workItem from="1616146877651" duration="607000" />
+      <workItem from="1616417243616" duration="246000" />
+      <workItem from="1616417549190" duration="6000" />
+      <workItem from="1616417990131" duration="619000" />
+      <workItem from="1616421868796" duration="14000" />
+      <workItem from="1616422123314" duration="2174000" />
+      <workItem from="1616492959933" duration="1963000" />
+      <workItem from="1616497155428" duration="755000" />
+      <workItem from="1616498077645" duration="9968000" />
+      <workItem from="1616577127818" duration="625000" />
+      <workItem from="1616615490678" duration="1999000" />
+      <workItem from="1616665549493" duration="16000" />
+      <workItem from="1616672211664" duration="744000" />
     </task>
     <servers />
   </component>
@@ -337,26 +339,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="499" y="167" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1536.824@0.0.1536.824" timestamp="1615145571940" />
-    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1614613415729">
+    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1616665563739">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1614613415729" />
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1606831434078">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1606831434078" />
-    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1606831434077">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1606831434077" />
-    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1606831434077">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1606831434077" />
-    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1606831434077">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1606831434077" />
+    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1616665563739" />
     <state x="525" y="135" key="NewPhpClassDialog" timestamp="1615461175054">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -377,10 +363,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="647" y="173" key="refactoring.ChangeSignatureDialog/0.0.1536.824@0.0.1536.824" timestamp="1611256178903" />
-    <state x="42" y="190" key="run.anything.popup" timestamp="1615459768776">
+    <state x="42" y="190" key="run.anything.popup" timestamp="1615558231757">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="42" y="190" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1615459768776" />
+    <state x="42" y="190" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1615558231757" />
     <state x="430" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1611735821497">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

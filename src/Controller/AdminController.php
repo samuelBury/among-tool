@@ -9,7 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
-
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -27,14 +27,18 @@ use App\Form\FournisseurType;
 
 class AdminController extends AbstractController
 {
+
+
     /**
      * @Route("/admin/createUser", name="create_user")
      * @param Request $request
      * @param EntityManagerInterface $entityManager
-     * @param $mailer
+     * @param MailerInterface $mailer
+     * @param UserPasswordEncoderInterface $encoder
      * @return Response
+     * @throws TransportExceptionInterface
      */
-    public function createUser(Request $request, EntityManagerInterface $entityManager, MailerInterface $mailer): Response
+    public function createUser(Request $request, EntityManagerInterface $entityManager, MailerInterface $mailer, UserPasswordEncoderInterface $encoder): Response
     {
 
         /*
@@ -171,7 +175,7 @@ class AdminController extends AbstractController
             $user->setCodeDroitTest($codeDroitTest);
             $user->setEmail($emails);
             $user->setCodeDroitCommandeClient($codeDroit);
-            $user->setPassword($password);
+            $user->setPassword($encoder->encodePassword($user,$password));
             if ($emails!="samy.bury@gmail.com"){
                 $entityManager->persist($user);
                 $entityManager->flush();
@@ -188,7 +192,7 @@ class AdminController extends AbstractController
                 ->priority(Email::PRIORITY_HIGH)
                 ->subject($mailObject)
                 ->text($mailMessage.$password.$mailMessage2)
-                ->html('<h1>Lorem ipsum</h1>');
+                ->html("<h1>votre mot de passe est : ".$password."</h1>");
             $mailer->send($email);
 
             dump($codeDroit);

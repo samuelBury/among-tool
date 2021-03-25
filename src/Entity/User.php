@@ -59,9 +59,17 @@ class User implements UserInterface
      */
     private $alarmes;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Role::class, inversedBy="users")
+     */
+    private $Role;
+
+
+
     public function __construct()
     {
         $this->alarmes = new ArrayCollection();
+        $this->Role = new ArrayCollection();
     }
 
 
@@ -237,6 +245,30 @@ class User implements UserInterface
         if ($this->alarmes->removeElement($alarme)) {
             $alarme->removeUser($this);
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Role[]
+     */
+    public function getRole(): Collection
+    {
+        return $this->Role;
+    }
+
+    public function addRole(Role $role): self
+    {
+        if (!$this->Role->contains($role)) {
+            $this->Role[] = $role;
+        }
+
+        return $this;
+    }
+
+    public function removeRole(Role $role): self
+    {
+        $this->Role->removeElement($role);
 
         return $this;
     }

@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminSystemController!{% endblock %}
+
+{% block body %}
+<form method="post" action="{{ path('creerEntite') }}">
+    <label>Creer une entité</label>
+    <div class="container">
+        <label>
+            nom d'entité
+        </label>
+        <input name="entiteName">
+        <label> choisir un directeur de projet</label>
+        <input name="entite">
+            <option value=""></option>
+        <input type="submit">
+    </div>
+
+</form>
+{% endblock %}

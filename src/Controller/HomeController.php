@@ -4,10 +4,12 @@ namespace App\Controller;
 
 use App\Entity\Alarme;
 use App\Repository\AlarmeRepository;
-use App\Repository\AlerteRepository;
+
 use App\Repository\TestClassRepository;
 use App\Repository\UserRepository;
 use DateTime;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,7 +20,7 @@ class HomeController extends AbstractController
      * @Route("/", name="home")
      * @throws \Exception
      */
-    public function index(UserRepository $repository, TestClassRepository $testRepo, AlarmeRepository $alarmeRepo): Response
+    public function index(UserRepository $repository, TestClassRepository $testRepo, AlarmeRepository $alarmeRepo, MailerInterface $mailer): Response
     {
 
         $auth = $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
@@ -65,23 +67,30 @@ class HomeController extends AbstractController
                                         dump('delai3');
                                     }
                                     dump($alerte);
-                                    $alertes[]=$alerte;
+                                    $alertes[] = $alerte;
+                                    $email = new Email();
+                                    $email->from('samy.bury@gmail.com');
+                                    $email->to($this->getUser()->getUsername());
+                                    $email->subject('alertes');
+                                    $email->html('<div>' . $message . '</div>');
+                                    $mailer->send($email);
 
                                 }
 
                             }
+                            return $this->render('home/index.html.twig', ['alertes' => $alertes,
+
+                            ]);
+
                         }
                     }
                 }
             }
+
+
+            return $this->render('home/index.html.twig', [
+
+            ]);
         }
 
-
-
-
-        return $this->render('home/index.html.twig', ['alertes'=>$alertes,
-
-        ]);
-    }
-
-}
+    }}

@@ -95,9 +95,16 @@
         "symfony/symfony": "*"
     },
     "extra": {
+        "patches": {
+            "symfony/maker-bundle": {
+                "Provide flag to force annotation in make entity command": "https://raw.githubusercontent.com/vklux/maker-bundle-force-annotation/master/maker-force-annotation-flag.patch"
+        }
+    },
+
         "symfony": {
             "allow-contrib": false,
             "require": "5.1.*"
         }
     }
+
 }

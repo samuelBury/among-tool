@@ -22,8 +22,8 @@ class AddFilleController extends AbstractController
             $file_dest ='C:/Users/samyb/PhpstormProjects/Among/files/'.$file_name;
             dump($file_name_tmp);
             dump($file_dest);
-
-            dump (move_uploaded_file($file_name_tmp, $file_dest));
+            dump($request);
+            move_uploaded_file($file_name_tmp, $file_dest);
         }
 
 
